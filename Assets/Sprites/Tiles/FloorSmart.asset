@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: FloorSmart
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 21300000, guid: 084a0aad978a78e46805dd0a59e81e31, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: 8dc707ce424a37e4fac475dc30867817, type: 3}
+    - {fileID: 21300000, guid: 084a0aad978a78e46805dd0a59e81e31, type: 3}
+    - {fileID: 21300000, guid: 38070efc554f35c479a3691281fafb65, type: 3}
+    - {fileID: 21300000, guid: 084a0aad978a78e46805dd0a59e81e31, type: 3}
+    - {fileID: 21300000, guid: 919b2ec106011f046b4b89bfd4c87fdb, type: 3}
+    - {fileID: 21300000, guid: 084a0aad978a78e46805dd0a59e81e31, type: 3}
+    - {fileID: 21300000, guid: 96af5212dbb82e44da7e0e4cb4a67fb1, type: 3}
+    - {fileID: 21300000, guid: 084a0aad978a78e46805dd0a59e81e31, type: 3}
+    - {fileID: 21300000, guid: 2d65a1bdd3776f542b3e944d5040f8f8, type: 3}
+    - {fileID: 21300000, guid: 084a0aad978a78e46805dd0a59e81e31, type: 3}
+    - {fileID: 21300000, guid: c5df9c3d4b557b74e93e0740a420093a, type: 3}
+    - {fileID: 21300000, guid: 084a0aad978a78e46805dd0a59e81e31, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.9
+    m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 1
+    m_Neighbors: 
+    m_NeighborPositions: []
+    m_RuleTransform: 0

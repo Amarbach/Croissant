@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Rune xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>eme</Name>
+  <Power>5</Power>
+  <Cost>3</Cost>
+  <Type>offensive</Type>
+  <Effects>
+    <string>fire</string>
+  </Effects>
+  <Modifiers>
+    <SpellModifier>
+      <Type>PCPOWER</Type>
+      <Intensity>0.5</Intensity>
+      <Condition>offensive</Condition>
+    </SpellModifier>
+  </Modifiers>
+</Rune>

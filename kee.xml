@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Rune xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>kee</Name>
+  <Power>2</Power>
+  <Cost>1</Cost>
+  <Type>offensive</Type>
+  <Effects>
+    <string>poison</string>
+    <string>earth</string>
+  </Effects>
+  <Modifiers>
+    <SpellModifier>
+      <Type>NCOST</Type>
+      <Intensity>2</Intensity>
+      <Condition>offensive</Condition>
+    </SpellModifier>
+  </Modifiers>
+</Rune>
