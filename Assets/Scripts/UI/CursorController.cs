@@ -33,8 +33,8 @@ public class CursorController : MonoBehaviour
         {
             panel.gameObject.SetActive(true);
             panel.Name = collision.gameObject.name;
-            CharacterController seen;
-            if(collision.gameObject.TryGetComponent<CharacterController>(out seen))
+            DungeonCharacterController seen;
+            if(collision.gameObject.TryGetComponent<DungeonCharacterController>(out seen))
             {
                 Character stats = seen.GetCharacter();
                 panel.Name = stats.Name;

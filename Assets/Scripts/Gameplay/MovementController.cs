@@ -10,19 +10,16 @@ public class MovementController : MonoBehaviour
     public UnityEvent finishedMovement = new();
     private Vector2 target;
     private Grid grid;
-    private CharacterController mainController;
     private bool isMoving;
-    public bool IsMoving { get { return isMoving; } }
     [SerializeField] private float speed = 1f;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        mainController = GetComponent<CharacterController>();
+        var mainController = GetComponent<DungeonCharacterController>();
         var turnController = transform.parent.GetComponent<TurnController>();
         finishedMovement.AddListener(mainController.EndTurn);
-        finishedMovement.AddListener(turnController.NextTurn);
         isMoving = false;
         grid = transform.parent.transform.parent.GetComponent<Grid>();
         target = grid.GetCellCenterLocal(grid.LocalToCell(transform.position));
@@ -47,38 +44,17 @@ public class MovementController : MonoBehaviour
     {
         if (!isMoving)
         {
-            var targetContent = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + displacement, 0.45f);
-            if (targetContent.Length <= 0)
-            {
-                target = grid.GetCellCenterLocal(grid.LocalToCell(target + displacement));
-                isMoving = true;
-            }
-            else
-            {
-                if (targetContent.Where(x => !x.CompareTag("Untagged")).Count() > 0)
-                {
-                    transform.position += new Vector3(displacement.x / 2.0f, displacement.y / 2.0f, 0.0f);
-                    isMoving = true;
-                    var doors = targetContent.Where(x => x.CompareTag("Door"));
-                    if (doors.Count() > 0)
-                    {
-                        GameObject.Destroy(doors.First().gameObject);
-                    }
-                    else
-                    {
-                        var enemies = targetContent.Where(x => !x.CompareTag(gameObject.tag) && (x.CompareTag("Faction1") || x.CompareTag("Faction0")));
-                        if (enemies.Count() > 0)
-                        {
-                            mainController.Attack(enemies.First().gameObject.GetComponent<CharacterController>());
-                        }
-                    }
-                }
-                else
-                {
-                    target = grid.GetCellCenterLocal(grid.LocalToCell(target + displacement));
-                    isMoving = true;
-                }
-            }
+            target = grid.GetCellCenterLocal(grid.LocalToCell(target + displacement));
+            isMoving = true;
+        }
+    }
+
+    public void Bounce(Vector2 displacement)
+    {
+        if (!isMoving)
+        {
+            transform.position += new Vector3(displacement.normalized.x, displacement.normalized.y, 0f) * 0.5f;
+            isMoving = true;
         }
     }
 
@@ -88,14 +64,9 @@ public class MovementController : MonoBehaviour
         target = grid.GetCellCenterLocal(grid.LocalToCell(transform.position));
     }
 
-    public void EndTurn()
-    {
-        finishedMovement.Invoke();
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(new Vector3(target.x, target.y, 0.0f), 0.5f);
+        Gizmos.DrawSphere(new Vector3(target.x, target.y, 0.0f), 0.15f);
     }
 }

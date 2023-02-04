@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TurnController : MonoBehaviour
 {
-    CharacterController character;
+    DungeonCharacterController character;
     List<EnemyController> enemies = new();
     int enemyTurnIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        character = gameObject.GetComponentInChildren<CharacterController>();
+        character = gameObject.GetComponentInChildren<DungeonCharacterController>();
         character.StartTurn();
     }
 

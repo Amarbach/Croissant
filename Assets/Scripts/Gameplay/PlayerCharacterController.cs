@@ -4,11 +4,8 @@ using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
 
-public class PlayerCharacterController : CharacterController
+public class PlayerCharacterController : DungeonCharacterController
 {
-    [SerializeField] private ExplosionController explosionPrefab;
-    [SerializeField] private GameObject cloudPrefab;
-    [SerializeField] private GameObject blockPrefab;
     [SerializeField] private Transform target;
     bool isObserving;
     bool isAiming;
@@ -28,22 +25,22 @@ public class PlayerCharacterController : CharacterController
         {
             if (Input.GetKeyDown(KeyCode.W) && !isObserving)
             {
-                if (!isAiming) movementController.Move(new Vector2(0.0f, 1.0f));
+                if (!isAiming) CheckDestination(new Vector2(0.0f, 1.0f));
                 else target.position += new Vector3(0.0f, 1.0f, 0f);
             }
             if (Input.GetKeyDown(KeyCode.S) && !isObserving)
             {
-                if (!isAiming) movementController.Move(new Vector2(0.0f, -1.0f));
+                if (!isAiming) CheckDestination(new Vector2(0.0f, -1.0f));
                 else target.position += new Vector3(0.0f, -1.0f, 0f);
             }
             if (Input.GetKeyDown(KeyCode.A) && !isObserving)
             {
-                if (!isAiming) movementController.Move(new Vector2(-1.0f, 0.0f));
+                if (!isAiming) CheckDestination(new Vector2(-1.0f, 0.0f));
                 else target.position += new Vector3(-1.0f, 0.0f, 0f);
             }
             if (Input.GetKeyDown(KeyCode.D) && !isObserving)
             {
-                if (!isAiming) movementController.Move(new Vector2(1.0f, 0.0f));
+                if (!isAiming) CheckDestination(new Vector2(1.0f, 0.0f));
                 else target.position += new Vector3(1.0f, 0.0f, 0f);
             }
             if (Input.GetKeyDown(KeyCode.Space) && !isObserving && !isAiming)
@@ -152,32 +149,10 @@ public class PlayerCharacterController : CharacterController
     void Test()
     {
         Rune letter1 = new Rune();
-        //letter1.Name = "eme";
-        //letter1.Cost = 3f;
-        //letter1.Power = 5f;
-        //letter1.Modifiers.Add(new SpellModifier() { Condition = "offensive", Intensity = 0.5f, Type = ModType.PCPOWER });
-        //letter1.Effects.Add("fire");
-        //letter1.Type = "offensive";
 
         Rune letter2 = new Rune();
-        //letter2.Name = "kee";
-        //letter2.Cost = 1f;
-        //letter2.Power = 6f;
-        //letter2.Modifiers.Add(new SpellModifier() { Condition = "offensive", Intensity = 2f, Type = ModType.NCOST });
-        //letter2.Effects.Add("poison");
-        //letter2.Effects.Add("earth");
-        //letter2.Type = "offensive";
 
         TargetingRune letter0 = new TargetingRune();
-        //letter0.Name = "iss";
-        //letter0.Cost = 1f;
-        //letter0.Modifiers.Add(new SpellModifier() { Condition = "offensive", Intensity = -1f, Type = ModType.NCOST });
-        //letter0.Type = "targeting";
-        //letter0.Area[2][2] = true;
-        //letter0.Area[2][3] = true;
-        //letter0.Area[2][1] = true;
-        //letter0.Area[3][2] = true;
-        //letter0.Area[1][2] = true;
 
         XmlSerializer serializer = new XmlSerializer(typeof(Rune));
         using (FileStream file = new FileStream(letter1.Name + "eme.xml", FileMode.Open))
@@ -201,17 +176,5 @@ public class PlayerCharacterController : CharacterController
         
 
         character.AddSpellInSlot(test, 0);
-    }
-
-    void CastSpellAt(Spell toCast, Vector3 position)
-    {
-        character.FP += toCast.Cost;
-        for(int i =0; i < toCast.Targeting.Area.Length; i++)
-        {
-            for(int j=0;j< toCast.Targeting.Area[i].Length; j++)
-            {
-                if (toCast.Targeting.Area[i][j]) Instantiate<ExplosionController>(explosionPrefab, new Vector3(position.x + (j - 2), position.y + (i - 2), position.z), Quaternion.identity).SetSource(this, toCast);
-            }
-        }
     }
 }

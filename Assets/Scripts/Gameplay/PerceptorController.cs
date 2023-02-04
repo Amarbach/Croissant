@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class PerceptorController : MonoBehaviour
 {
-    public UnityEvent<EnemyController> spotted = new();
-    public UnityEvent<EnemyController> away = new();
+    public UnityEvent<DungeonCharacterController> spotted = new();
+    public UnityEvent<DungeonCharacterController> away = new();
     private EnemyController parentEnemy;
     private void Start()
     {
@@ -14,15 +14,15 @@ public class PerceptorController : MonoBehaviour
         var turnController = transform.parent.transform.parent.GetComponent<TurnController>();
         if (turnController != null)
         {
-            spotted.AddListener(turnController.AddEnemy);
-            away.AddListener(turnController.RemoveEnemy);
+            spotted.AddListener(parentEnemy.OnSpotted);
+            away.AddListener(parentEnemy.OnAway);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Faction0"))
         {
-            spotted.Invoke(parentEnemy);
+            spotted.Invoke(collision.GetComponent<DungeonCharacterController>());
         }
     }
 
@@ -30,7 +30,7 @@ public class PerceptorController : MonoBehaviour
     {
         if (collision.CompareTag("Faction0"))
         {
-            away.Invoke(parentEnemy);
+            away.Invoke(collision.GetComponent<DungeonCharacterController>());
         }
     }
 }

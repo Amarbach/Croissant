@@ -1,44 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ExplosionController : MonoBehaviour
 {
+    
     Spell source = null;
-    CharacterController caster = null;
-    float lifetime = 0.1f;
-    float life = 0.0f;
-    void Start()
-    {
-        
-    }
+    DungeonCharacterController caster = null;
+    [SerializeField] FadeController fade;
+    public UnityEvent Faded { get { return fade.faded; } }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (life > lifetime)
-        {
-            Destroy(gameObject);
-        }
-        life += Time.deltaTime;
+        fade.Fade(true);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Faction0") || collision.CompareTag("Faction1"))
         {
-            CharacterController character;
-            if(collision.TryGetComponent<CharacterController>(out character))
+            DungeonCharacterController character;
+            if(collision.TryGetComponent<DungeonCharacterController>(out character))
             {
                 character.GetCharacter().TakeDamage(source.Power);
                 if (character.GetCharacter().IsDead) character.died.Invoke();
             }
         }
+        else
+        {
+            //Destroy(gameObject);
+        }
     }
 
-    public void SetSource(CharacterController caster, Spell spell)
+    public ExplosionController SetSource(DungeonCharacterController caster, Spell spell)
     {
         this.caster = caster;
         this.source = spell;
+        return this;
     }
+
+
 }

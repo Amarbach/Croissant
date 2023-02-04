@@ -104,7 +104,7 @@ MonoBehaviour:
   finishedMovement:
     m_PersistentCalls:
       m_Calls: []
-  speed: 5
+  speed: 10
 --- !u!114 &3212969182907449458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +117,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34965915824ae1b4cbe3f2823b81dd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  died:
+    m_PersistentCalls:
+      m_Calls: []
   template: {fileID: 11400000, guid: 413b6aae9e940264093a0edc11f8ace2, type: 2}
   movementController: {fileID: 3212969182907449457}
+  explosionPrefab: {fileID: 7199218358626049970, guid: ea845eae0e3fe2143922aef1d579a8b4, type: 3}
+  cloudPrefab: {fileID: 0}
+  blockPrefab: {fileID: 0}
 --- !u!61 &5201899313330581051
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
 --- !u!50 &7819503090337885494
 Rigidbody2D:
